@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221 83% 53%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221 83% 53%;
+  --radius: 0.5rem;
+  --ieee-blue: 240 50% 25%;
+  --ieee-yellow: 45 90% 65%;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
+}
+
+body {
+  @apply bg-white text-foreground;
+}
+
+.network-bg {
+  background-color: hsl(var(--ieee-blue));
+  background-image: url("/images/network-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Assuming this is where .yellow-wave is defined */
+.yellow-wave {
+  background-color: hsl(var(--ieee-yellow)); /* Keep the yellow background */
+  /* Remove any pseudo-elements, shadows, or gradients */
+  position: relative; /* In case it's needed for layout, but no ::after */
+}
+
+/* Ensure no pseudo-elements are adding shadows */
+.yellow-wave::before,
+.yellow-wave::after {
+  display: none; /* Disable any wave or shadow effects */
+}
+
+/* 3D Carousel */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  perspective: 1000px;
+  overflow: hidden;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1s ease;
+}
+
+.carousel-card {
+  position: absolute;
+  width: 250px;
+  height: 350px;
+  left: calc(50% - 125px);
+  top: calc(50% - 175px);
+  transition: transform 1s ease, opacity 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.carousel-card-inner {
+  width: 100%;
+  height: 100%;
+  background-color: #f3f4f6;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  transform-style: preserve-3d;
+  transform: translateZ(20px);
+  transition: transform 0.3s ease;
+}
+
+.carousel-card:hover .carousel-card-inner {
+  transform: translateZ(30px) scale(1.05);
+}
+
+.carousel-card .aspect-square {
+  height: 65%;
+  border-bottom: none;
+}
+
+.carousel-card h3,
+.carousel-card p {
+  transform: translateZ(5px);
+}
+
+/* Remove the shadow/line in the middle */
+.yellow-wave::before {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-container {
+    height: 350px;
+  }
+
+  .carousel-card {
+    width: 200px;
+    height: 300px;
+    left: calc(50% - 100px);
+    top: calc(50% - 150px);
+  }
+}
