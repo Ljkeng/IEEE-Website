@@ -61,17 +61,16 @@ body {
   background-repeat: no-repeat;
 }
 
-/* Assuming this is where .yellow-wave is defined */
+/* Yellow wave section without shadows or lines */
 .yellow-wave {
-  background-color: hsl(var(--ieee-yellow)); /* Keep the yellow background */
-  /* Remove any pseudo-elements, shadows, or gradients */
-  position: relative; /* In case it's needed for layout, but no ::after */
+  background-color: hsl(var(--ieee-yellow));
+  position: relative;
 }
 
 /* Ensure no pseudo-elements are adding shadows */
 .yellow-wave::before,
 .yellow-wave::after {
-  display: none; /* Disable any wave or shadow effects */
+  display: none;
 }
 
 /* 3D Carousel */
@@ -129,11 +128,6 @@ body {
 .carousel-card h3,
 .carousel-card p {
   transform: translateZ(5px);
-}
-
-/* Remove the shadow/line in the middle */
-.yellow-wave::before {
-  display: none;
 }
 
 /* Responsive adjustments */
