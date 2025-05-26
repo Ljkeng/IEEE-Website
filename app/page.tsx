@@ -7,22 +7,12 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="flex items-center gap-4 mb-6">
-              <div className="h-16 w-16 rounded-full bg-blue-600 flex items-center justify-center">
-                <Image src="/images/ieee-logo.png" alt="IEEE Logo" width={40} height={40} className="object-contain" />
-              </div>
+
+                <Image src="/images/ieee-logo.png" alt="IEEE Logo" width={800} height={800} className="object-contain" />
+              
             </div>
-
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              IEEE Computer Society
-              <br />
-              <span className="text-[hsl(var(--ieee-yellow))]">UM Student Branch</span>
-            </h1>
-
             <p className="text-white/80 max-w-2xl mb-8">
-              Lorem ipsum dolor sit amet, Et minus repudiandae sit internos odit est totam error et natus doloremque qui
-              ullam voluptas. Ut quia consequatur ut illo iure hic numquam minima. Qui volum voluptatem ut duis,
-              architecto natus necessitatibus ad omnis neque. Id consequatur inventore qui omnis Quis non veniam error
-              aut natus illo et laudantium sapiente!
+              The IEEE Computer Society UM Student Branch is a dynamic community at the University of Malaya, focused on advancing tech skills and innovation. We offer workshops, tech talks, and coding competitions to help students excel in computer science and connect with industry professionals. Join us to shape the future of technology!
             </p>
           </div>
         </div>
