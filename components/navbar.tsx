@@ -1,62 +1,76 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu } from "lucide-react"
+import { Menu, X } from "lucide-react"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
+
+  const navItems = [
+    { href: "/", label: "Home" },
+    { href: "/events", label: "Events" },
+    { href: "/committee", label: "Committee" },
+    { href: "/faqs", label: "FAQs" },
+  ]
+
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/"
+    }
+    return pathname.startsWith(href)
+  }
 
   return (
-    <header className="bg-[hsl(var(--ieee-blue))] sticky top-0 z-50">
+    <header className="bg-[hsl(var(--ieee-blue))] sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="h-10 w-10 bg-blue-600 rounded-full flex items-center justify-center">
-            <Image src="/images/ieee-logo.png" alt="IEEE Logo" width={24} height={24} className="object-contain" />
-          </div>
-          <div className="text-white text-xs">
-            <p className="font-medium">IEEE</p>
-            <p>Computer</p>
-            <p>Society UM</p>
-          </div>
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+
+            <Image src="/images/ieee-logo.png" alt="IEEE Logo" width={124} height={124} className="object-contain" />
+
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
-          <NavLink href="/">Home</NavLink>
-          <NavLink href="/events">Events</NavLink>
-          <NavLink href="/committee" highlight>
-            Committee
-          </NavLink>
-          <NavLink href="/faqs">FAQs</NavLink>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navItems.map((item) => (
+            <NavLink key={item.href} href={item.href} isActive={isActive(item.href)}>
+              {item.label}
+            </NavLink>
+          ))}
         </nav>
 
-        <div className="h-8 w-8 bg-[hsl(var(--ieee-yellow))] rounded-sm"></div>
-
-        <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <Menu />
+        {/* Mobile menu button */}
+        <button
+          className="md:hidden text-white p-2 hover:bg-white/10 rounded-md transition-colors"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-[hsl(var(--ieee-blue))] py-4 px-4">
-          <nav className="flex flex-col gap-4">
-            <MobileNavLink href="/" onClick={() => setIsMenuOpen(false)}>
-              Home
-            </MobileNavLink>
-            <MobileNavLink href="/events" onClick={() => setIsMenuOpen(false)}>
-              Events
-            </MobileNavLink>
-            <MobileNavLink href="/committee" onClick={() => setIsMenuOpen(false)} highlight>
-              Committee
-            </MobileNavLink>
-            <MobileNavLink href="/faqs" onClick={() => setIsMenuOpen(false)}>
-              FAQs
-            </MobileNavLink>
+        <div className="md:hidden bg-[hsl(var(--ieee-blue))] border-t border-white/10">
+          <nav className="container mx-auto py-4 px-4">
+            <div className="flex flex-col gap-2">
+              {navItems.map((item) => (
+                <MobileNavLink
+                  key={item.href}
+                  href={item.href}
+                  isActive={isActive(item.href)}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </MobileNavLink>
+              ))}
+            </div>
           </nav>
         </div>
       )}
@@ -67,19 +81,24 @@ export default function Navbar() {
 interface NavLinkProps {
   href: string
   children: React.ReactNode
-  highlight?: boolean
+  isActive?: boolean
 }
 
-function NavLink({ href, children, highlight = false }: NavLinkProps) {
+function NavLink({ href, children, isActive = false }: NavLinkProps) {
   return (
     <Link
       href={href}
       className={cn(
-        "text-white hover:text-[hsl(var(--ieee-yellow))] transition-colors",
-        highlight && "text-[hsl(var(--ieee-yellow))]",
+        "relative px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md",
+        isActive
+          ? "text-[hsl(var(--ieee-yellow))] bg-white/10"
+          : "text-white hover:text-[hsl(var(--ieee-yellow))] hover:bg-white/5",
       )}
     >
       {children}
+      {isActive && (
+        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[hsl(var(--ieee-yellow))] rounded-full" />
+      )}
     </Link>
   )
 }
@@ -88,13 +107,15 @@ interface MobileNavLinkProps extends NavLinkProps {
   onClick: () => void
 }
 
-function MobileNavLink({ href, children, highlight = false, onClick }: MobileNavLinkProps) {
+function MobileNavLink({ href, children, isActive = false, onClick }: MobileNavLinkProps) {
   return (
     <Link
       href={href}
       className={cn(
-        "text-white hover:text-[hsl(var(--ieee-yellow))] transition-colors py-2",
-        highlight && "text-[hsl(var(--ieee-yellow))]",
+        "block px-4 py-3 text-sm font-medium transition-all duration-200 rounded-md",
+        isActive
+          ? "text-[hsl(var(--ieee-yellow))] bg-white/10"
+          : "text-white hover:text-[hsl(var(--ieee-yellow))] hover:bg-white/5",
       )}
       onClick={onClick}
     >
