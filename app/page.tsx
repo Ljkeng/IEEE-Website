@@ -1,30 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Calendar, Users, ArrowRight, Code, Lightbulb, Network } from "lucide-react"
+import { hicomMembers, events } from "./data"
 
 export default function Home() {
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: "AI & Machine Learning Workshop",
-      date: "2024-04-15",
-      attendees: 120,
-      image: "/images/event-placeholder.jpg",
-    },
-    {
-      id: 2,
-      title: "IEEE Annual Dinner",
-      date: "2024-05-20",
-      attendees: 200,
-      image: "/images/event-placeholder.jpg",
-    },
-  ]
-
-  const hicomMembers = [
-    { name: "Alex Chen", position: "Director", image: "/images/member-placeholder.jpg" },
-    { name: "Sarah Wong", position: "Vice Director", image: "/images/member-placeholder.jpg" },
-    { name: "Michael Tan", position: "Secretary", image: "/images/member-placeholder.jpg" },
-  ]
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -124,7 +103,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {upcomingEvents.map((event) => (
+            {events.filter(event => event.isUpcoming == true).slice(0, 2).map((event) => (
               <div key={event.id} className="bg-gray-50 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="flex">
                   <div className="w-1/3">
@@ -173,8 +152,8 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {hicomMembers.map((member, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {hicomMembers.slice(0, 4).map((member, index) => (
               <div key={index} className="text-center">
                 <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
                   <Image
