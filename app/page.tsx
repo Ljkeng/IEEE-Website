@@ -6,7 +6,7 @@ export default function Home() {
   const upcomingEvents = [
     {
       id: 1,
-      title: "AI & Machine Learning Workshop",
+      title: "Data Structure Workshop",
       date: "2024-04-15",
       attendees: 120,
       image: "/images/event-placeholder.jpg",
@@ -21,9 +21,10 @@ export default function Home() {
   ]
 
   const hicomMembers = [
-    { name: "Alex Chen", position: "Director", image: "/images/member-placeholder.jpg" },
-    { name: "Sarah Wong", position: "Vice Director", image: "/images/member-placeholder.jpg" },
-    { name: "Michael Tan", position: "Secretary", image: "/images/member-placeholder.jpg" },
+    { id: 1, name: "Faris Ikhwan", position: "President", image: "/images/member-placeholder.jpg" },
+    { id: 2, name: "Ade Aiman", position: "Vice President", image: "/images/member-placeholder.jpg" },
+    { id: 3, name: "Haiqal", position: "Secretary", image: "/images/member-placeholder.jpg" },
+    { id: 4, name: "Andrian Nazriel", position: "Treasurer", image: "/images/member-placeholder.jpg" },
   ]
 
   return (
@@ -173,7 +174,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {hicomMembers.map((member, index) => (
               <div key={index} className="text-center">
                 <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">

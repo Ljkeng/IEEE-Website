@@ -3,94 +3,11 @@
 import { useState } from "react"
 import Image from "next/image"
 import { Calendar, Clock, MapPin, Users, X, ArrowRight } from "lucide-react"
-
-interface Event {
-  id: number
-  title: string
-  image: string
-  slug: string
-  date: string
-  time: string
-  location: string
-  attendees: number
-  description: string
-  isUpcoming?: boolean
-  category: string
-}
+import { Event, events } from "../data"
 
 export default function EventsPage() {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
   const [filter, setFilter] = useState<"all" | "upcoming" | "past">("all")
-
-  const events: Event[] = [
-    {
-      id: 1,
-      title: "AI & Machine Learning Workshop",
-      image: "/images/event-placeholder.jpg",
-      slug: "ai-workshop-2024",
-      date: "2024-04-15",
-      time: "2:00 PM - 5:00 PM",
-      location: "Faculty of Computer Science, UM",
-      attendees: 120,
-      category: "Workshop",
-      description:
-        "Join us for an intensive workshop on AI and Machine Learning fundamentals. Learn about neural networks, deep learning, and practical applications in modern technology. This hands-on session will cover Python programming for AI, TensorFlow basics, and real-world case studies.",
-      isUpcoming: true,
-    },
-    {
-      id: 2,
-      title: "IEEE Student Branch Annual Dinner",
-      image: "/images/event-placeholder.jpg",
-      slug: "annual-dinner-2024",
-      date: "2024-05-20",
-      time: "7:00 PM - 11:00 PM",
-      location: "Grand Ballroom, Kuala Lumpur",
-      attendees: 200,
-      category: "Social",
-      description:
-        "Celebrate another successful year with the IEEE Computer Society UM Student Branch. Join fellow members, faculty, and industry professionals for an evening of networking, awards ceremony, and entertainment.",
-      isUpcoming: true,
-    },
-    {
-      id: 3,
-      title: "Cybersecurity Awareness Seminar",
-      image: "/images/event-placeholder.jpg",
-      slug: "cybersecurity-seminar-2024",
-      date: "2024-02-10",
-      time: "10:00 AM - 12:00 PM",
-      location: "Lecture Hall 1, UM",
-      attendees: 85,
-      category: "Seminar",
-      description:
-        "Learn about the latest cybersecurity threats and protection strategies. Industry experts shared insights on data protection, network security, and best practices for personal and organizational cybersecurity.",
-    },
-    {
-      id: 4,
-      title: "Programming Competition 2024",
-      image: "/images/event-placeholder.jpg",
-      slug: "programming-competition-2024",
-      date: "2024-01-25",
-      time: "9:00 AM - 6:00 PM",
-      location: "Computer Lab, UM",
-      attendees: 60,
-      category: "Competition",
-      description:
-        "Annual programming competition featuring algorithmic challenges and problem-solving tasks. Participants competed in teams to solve complex programming problems within time constraints.",
-    },
-    {
-      id: 5,
-      title: "Industry Talk: Future of Tech",
-      image: "/images/event-placeholder.jpg",
-      slug: "industry-talk-2024",
-      date: "2024-03-08",
-      time: "3:00 PM - 5:00 PM",
-      location: "Auditorium, UM",
-      attendees: 150,
-      category: "Talk",
-      description:
-        "Leading industry professionals discussed emerging technologies, career opportunities, and the future landscape of the tech industry. Q&A session included insights on job market trends and skill development.",
-    },
-  ]
 
   const filteredEvents = events.filter((event) => {
     if (filter === "upcoming") return event.isUpcoming
