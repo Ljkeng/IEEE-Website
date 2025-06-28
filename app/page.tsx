@@ -152,8 +152,8 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {hicomMembers.slice(0, 4).map((member, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
+            {hicomMembers.map((member, index) => (
               <div key={index} className="text-center">
                 <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
                   <Image
